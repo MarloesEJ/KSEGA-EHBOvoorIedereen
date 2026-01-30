@@ -11,6 +11,7 @@ public class PrecisionPourGame : MonoBehaviour
     public GameObject startButton;
     public GameObject gameGuide;
     public GameObject endText;
+    public BurnTreatmentEvaluator burnEvaluator;
 
 
     [Header("Settings")]
@@ -86,7 +87,11 @@ public class PrecisionPourGame : MonoBehaviour
         if (timeInSafe >= requiredTimeInSafe)
         {
             gameActive = false;
-            Debug.Log("Gewonnen! Wond is schoon!");
+
+            // REGISTREER JUISTE EHBO-STAP
+            burnEvaluator.RegisterAction(EHBOAction.Koelen);
+
+            Debug.Log("Koelen succesvol uitgevoerd!");
             EndGame();
         }
     }
