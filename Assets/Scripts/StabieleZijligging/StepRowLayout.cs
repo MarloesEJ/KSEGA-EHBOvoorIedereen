@@ -6,7 +6,7 @@ public class StepRowLayout : MonoBehaviour
     [SerializeField] private StepPlaceholder[] items;
     [SerializeField] private Camera targetCamera;
     [SerializeField] private float horizontalPadding = 0.6f;
-    [SerializeField] private bool shuffleOnStart = true;
+    [SerializeField] private bool shuffleOnStart = false;
     [SerializeField] private bool useFixedXBounds = true;
     [SerializeField] private float minX = -6f;
     [SerializeField] private float maxX = 6f;

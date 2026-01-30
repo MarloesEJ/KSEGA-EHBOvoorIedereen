@@ -15,15 +15,12 @@ public static class StabieleZijliggingSceneGenerator
     private const string BackgroundSpritePath = "Assets/assets/IMG/Voorgrond.png";
     private const string PlaceholderSpritePath = "Assets/assets/Basic figures/Basic Square.png";
     private const string StepSpriteFolder = "Assets/assets/IMG/StabieleZijligging";
+    private const string PositieSpritePrefix = "Positie_";
     private const string ScenePath = "Assets/Scenes/LevelStabieleZijligging.unity";
     private const int DefaultStepCount = 5;
     private const float StepImageScale = 0.2f;
-    private const float SlotScale = 1f;
-    private static readonly Color SlotTint = new Color(0.65f, 0.65f, 0.65f, 0.45f);
-    private const float LabelOffset = 0.35f;
-    private const int LabelFontSize = 42;
-    private const float LabelCharacterSize = 0.08f;
-    private static readonly Color LabelColor = Color.black;
+    private static readonly Vector3 PositieDisplayPosition = new Vector3(-0.91f, -1.92f, 0f);
+    private const int PositieDisplaySortingOrder = 0;
 
     [MenuItem("Tools/Generate/Level Stabiele Zijligging")]
     public static void Generate()
@@ -41,9 +38,6 @@ public static class StabieleZijliggingSceneGenerator
         {
             var imageLayout = boardGO.GetComponentInChildren<StepRowLayout>();
             imageLayout?.Layout(false);
-
-            var slotLayout = boardGO.GetComponentInChildren<DropSlotLayout>();
-            slotLayout?.Layout();
         }
 
         EditorSceneManager.MarkSceneDirty(scene);
@@ -103,16 +97,14 @@ public static class StabieleZijliggingSceneGenerator
         var imageLayout = imagesRoot.AddComponent<StepRowLayout>();
         imageLayout.SetTargetCamera(targetCamera);
 
-        var slotsRoot = new GameObject("StepSlots");
-        slotsRoot.transform.SetParent(board.transform, false);
-        slotsRoot.transform.position = new Vector3(0,-1.5f);
-        var slotLayout = slotsRoot.AddComponent<DropSlotLayout>();
-        slotLayout.SetTargetCamera(targetCamera);
-        slotLayout.SetPerSlotYOffset(new[] { -2f, -4f, -2f, -4f, -2f });
+        var positieSprites = LoadPositieSprites(stepCount);
+        var displayRenderer = CreatePositieDisplay(board.transform, positieSprites, sprite);
+
+        var zijliggingManager = board.AddComponent<ZijliggingGameManager>();
+        zijliggingManager.SetTargetRenderer(displayRenderer);
+        zijliggingManager.SetStepSprites(positieSprites);
 
         var placeholders = new StepPlaceholder[stepCount];
-        var slots = new DropSlot[stepCount];
-        var summaries = GetStepSummaries(stepCount);
         for (int i = 0; i < stepCount; i++)
         {
             var image = new GameObject($"StepImage_{i + 1}");
@@ -127,63 +119,20 @@ public static class StabieleZijliggingSceneGenerator
             var collider = image.AddComponent<BoxCollider2D>();
             FitColliderToSprite(collider, renderer);
 
-            var draggable = image.AddComponent<DraggablePlaceholder>();
-            draggable.SetTargetCamera(targetCamera);
-            draggable.SetDropSlotLayout(slotLayout);
-
             var placeholder = image.AddComponent<StepPlaceholder>();
             placeholder.orderIndex = i + 1;
             placeholders[i] = placeholder;
 
-            var slot = new GameObject($"StepSlot_{i + 1}");
-            slot.transform.SetParent(slotsRoot.transform);
-            slot.transform.position = Vector3.zero;
-
-            var slotRenderer = slot.AddComponent<SpriteRenderer>();
-            slotRenderer.sprite = sprite;
-            slotRenderer.color = SlotTint;
-            slotRenderer.sortingOrder = 5;
-
-            var dropSlot = slot.AddComponent<DropSlot>();
-            dropSlot.orderIndex = i + 1;
-            slots[i] = dropSlot;
-
-            var label = new GameObject($"StepLabel_{i + 1}");
-            label.transform.SetParent(slot.transform, false);
-            label.transform.localPosition = new Vector3(0f, LabelOffset, 0f);
-
-            var textMesh = label.AddComponent<TextMesh>();
-            textMesh.text = summaries[i];
-            textMesh.anchor = TextAnchor.LowerCenter;
-            textMesh.alignment = TextAlignment.Center;
-            textMesh.fontSize = LabelFontSize;
-            textMesh.characterSize = LabelCharacterSize;
-            textMesh.color = LabelColor;
-
-            var textRenderer = label.GetComponent<MeshRenderer>();
-            if (textRenderer != null)
-            {
-                textRenderer.sortingOrder = 30;
-            }
+            var stepButton = image.AddComponent<ZijliggingStepButton>();
+            stepButton.SetStepNumber(i + 1);
+            stepButton.SetManager(zijliggingManager);
         }
 
         imageLayout.SetItems(placeholders);
-        slotLayout.SetSlots(slots);
 
         var popup = new GameObject("LevelCompletionPopup");
         popup.transform.SetParent(board.transform, false);
         return board;
-    }
-
-    private static string[] GetStepSummaries(int stepCount)
-    {
-        var result = new string[stepCount];
-        for (int i = 0; i < stepCount; i++)
-        {
-            result[i] = $"{i + 1}.";
-        }
-
-        return result;
     }
 
     private static Sprite LoadStepSprite(int stepIndex)
@@ -200,6 +149,68 @@ public static class StabieleZijliggingSceneGenerator
         }
 
         return null;
+    }
+
+    private static Sprite[] LoadPositieSprites(int stepCount)
+    {
+        var sprites = new Sprite[stepCount];
+        for (int i = 0; i < stepCount; i++)
+        {
+            sprites[i] = LoadPositieSprite(i + 1);
+            if (sprites[i] == null)
+            {
+                Debug.LogWarning($"Positie sprite not found for step {i + 1} in {StepSpriteFolder}.");
+            }
+        }
+
+        return sprites;
+    }
+
+    private static Sprite LoadPositieSprite(int positionIndex)
+    {
+        string[] extensions = { ".png", ".jpg", ".jpeg" };
+        foreach (string extension in extensions)
+        {
+            string path = $"{StepSpriteFolder}/{PositieSpritePrefix}{positionIndex}{extension}";
+            var sprite = AssetDatabase.LoadAssetAtPath<Sprite>(path);
+            if (sprite != null)
+            {
+                return sprite;
+            }
+        }
+
+        return null;
+    }
+
+    private static SpriteRenderer CreatePositieDisplay(Transform parent, Sprite[] sprites, Sprite fallback)
+    {
+        var display = new GameObject("PositieDisplay");
+        display.transform.SetParent(parent, false);
+        display.transform.position = PositieDisplayPosition;
+
+        var renderer = display.AddComponent<SpriteRenderer>();
+        renderer.sortingOrder = PositieDisplaySortingOrder;
+
+        var sprite = GetFirstSpriteOrFallback(sprites, fallback);
+        renderer.sprite = sprite;
+
+        return renderer;
+    }
+
+    private static Sprite GetFirstSpriteOrFallback(Sprite[] sprites, Sprite fallback)
+    {
+        if (sprites != null)
+        {
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                if (sprites[i] != null)
+                {
+                    return sprites[i];
+                }
+            }
+        }
+
+        return fallback;
     }
 
     private static void FitColliderToSprite(BoxCollider2D collider, SpriteRenderer renderer)

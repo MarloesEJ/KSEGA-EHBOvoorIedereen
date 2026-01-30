@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6005fb17e777eb945b9522ed362d67c5
+guid: cdfde1ac9e72df741b9fd42d8cef8b85
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2709731621963908632
-    second: Positie 5_0
+      213: -1412618986083278897
+    second: Positie_5_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Positie 5_0
+      name: Positie_5_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2048
-        height: 1365
+        x: 73
+        y: 89
+        width: 467
+        height: 275
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8e9b2345279156ad0800000000000000
-      internalID: -2709731621963908632
+      spriteID: fcf988b348e556ce0800000000000000
+      internalID: -1412618986083278897
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Positie 5_0: -2709731621963908632
+      Positie_5_0: -1412618986083278897
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
