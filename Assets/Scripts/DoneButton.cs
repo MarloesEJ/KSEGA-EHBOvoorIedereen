@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -8,9 +8,9 @@ public class DoneButton : MonoBehaviour
 
     [Header("Result UI")]
     public GameObject resultPanel;
-    public Image[] stars; // 3 sterren
-    public Sprite inactiveStar; // grijze ster
-    public Sprite activeStar;   // gele ster
+    public Image[] stars;             // 3 sterren (Image)
+    public Sprite inactiveStar;       // grijze ster
+    public Sprite activeStar;         // gele ster
     public TextMeshProUGUI scoreText;
 
     [Header("Disable On Finish")]
@@ -20,20 +20,23 @@ public class DoneButton : MonoBehaviour
     {
         Debug.Log("Done pressed!");
 
-        // Stop game
+        // Game stoppen
         GameManager.Instance.SetState(GameState.Win);
 
-        // Resultaat ophalen
-        var result = burnEvaluator.FinishTreatment();
+        // 👉 HUIDIGE score ophalen (live evaluatie)
+        var result = burnEvaluator.GetCurrentScore();
 
-        // Sterren resetten naar inactive sprite
+        // 👉 Score NU pas toevoegen aan GameManager
+        GameManager.Instance.AddScore(result.points);
+
+        // Sterren resetten
         for (int i = 0; i < stars.Length; i++)
         {
             stars[i].sprite = inactiveStar;
         }
 
-        // Juiste aantal sterren instellen op active sprite
-        for (int i = 0; i < result.stars; i++)
+        // Actieve sterren instellen
+        for (int i = 0; i < result.stars && i < stars.Length; i++)
         {
             stars[i].sprite = activeStar;
         }
@@ -44,5 +47,6 @@ public class DoneButton : MonoBehaviour
         // UI aanpassen
         resultPanel.SetActive(true);
         ehboDoos.SetActive(false);
+        gameObject.SetActive(false); // Done knop zelf weg
     }
 }

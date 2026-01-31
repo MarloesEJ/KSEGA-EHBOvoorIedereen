@@ -1,6 +1,7 @@
 public enum EHBOAction
 {
-    Koelen,     // arm onder kraan
+    None,
+    Koelen,   
     Gaas,
     Verband
 }
