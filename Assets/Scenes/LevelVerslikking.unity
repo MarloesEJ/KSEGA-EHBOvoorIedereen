@@ -323,7 +323,7 @@ MonoBehaviour:
   stopDistance: 0.01
   startScale: {x: 0.4, y: 0.4, z: 0.4}
   endScale: {x: 0.8, y: 0.8, z: 0.8}
-  speechBubble: {fileID: 0}
+  speechBubble: {fileID: 151829299}
   clickShowBack: {fileID: 76538876}
 --- !u!114 &76538876
 MonoBehaviour:
@@ -344,7 +344,7 @@ MonoBehaviour:
   canClick: 0
   timingBarObject: {fileID: 0}
   armUIObject: {fileID: 0}
-  hitTextObject: {fileID: 0}
+  hitTextObject: {fileID: 196928980}
   hitSystem: {fileID: 680233625}
 --- !u!61 &76538877
 BoxCollider2D:
@@ -488,7 +488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &151829300
 RectTransform:
   m_ObjectHideFlags: 0

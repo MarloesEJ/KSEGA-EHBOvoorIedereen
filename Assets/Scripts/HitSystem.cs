@@ -167,7 +167,7 @@ public class HitSystem : MonoBehaviour
 
         // "Goed gedaan!" tonen
         if (hitText != null)
-            hitText.text = "Goed gedaan!";
+            hitText.text = " ";
 
         // Bar + arm verbergen
         if (timingBarObject != null)
