@@ -533,6 +533,14 @@ MonoBehaviour:
   pressureGameParent: {fileID: 701753559}
   manWithWound: {fileID: 1078195509}
   manWithBandage: {fileID: 854033451}
+  resultPanel: {fileID: 1867775553}
+  stars:
+  - {fileID: 1867775552}
+  - {fileID: 1867775551}
+  - {fileID: 1867775550}
+  inactiveStar: {fileID: 3743459777976503195, guid: 5a18a5f635900384d9113476455cddbe, type: 3}
+  activeStar: {fileID: 109825315998151862, guid: 740ec4cc14e8cb147a50a9d203dc562e, type: 3}
+  scoreText: {fileID: 1867775549}
   points: 0
 --- !u!4 &294078978
 Transform:
@@ -1074,54 +1082,6 @@ RectTransform:
   m_AnchoredPosition: {x: 9.07, y: 0.11}
   m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &616441082
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 616441083}
-  - component: {fileID: 616441084}
-  m_Layer: 0
-  m_Name: GlobalLevelManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &616441083
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616441082}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.233383, y: 1.2052685, z: -4.2148094}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1143342189}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &616441084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616441082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33a637b6e112ffd4481746211ddc6d54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelSceneOrder: []
-  currentLevelIndex: 0
-  score: 0
-  lives: 3
 --- !u!1 &629900890
 GameObject:
   m_ObjectHideFlags: 0
@@ -2421,7 +2381,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 616441083}
   - {fileID: 294078978}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2654,6 +2613,10 @@ PrefabInstance:
     - target: {fileID: 6667968065603324743, guid: f47069034c5e5fe43bd2ca6f9de952ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889967288068965456, guid: f47069034c5e5fe43bd2ca6f9de952ae, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3075,6 +3038,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1486815423}
   m_CullTransparentMesh: 1
+--- !u!224 &1499920328 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+  m_PrefabInstance: {fileID: 1867775548}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1619907122
 GameObject:
   m_ObjectHideFlags: 0
@@ -3208,7 +3176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Done
+  m_text: Klaar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3421,6 +3389,176 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 12
   m_TargetDisplay: 0
+--- !u!1001 &1867775548
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8985835260719299514}
+    m_Modifications:
+    - target: {fileID: 1088871741069157349, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_text
+      value: Druk met een schone doek of gaas stevig op de diepe wond (liefst 10
+        minuten zonder te kijken) om het bloeden te stoppen. Als het doorlekt, leg
+        er extra gaas bovenop en blijf drukken, haal het eerste gaas niet weg. Wikkel
+        daarna een verband eromheen om de druk te houden, maar bel direct 112/huisarts
+        bij hevig bloeden of als de wond diep open blijft staan.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2560
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1440
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 8.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682357489076306512, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808988218709023271, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5825401017548554965, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_Name
+      value: Resultaten
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840944197713552642, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 294078977}
+    - target: {fileID: 8840944197713552642, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Nextlevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840944197713552642, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HeftigeBloedingLevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+--- !u!114 &1867775549 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7973940108273358730, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+  m_PrefabInstance: {fileID: 1867775548}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1867775550 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5174385664653628105, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+  m_PrefabInstance: {fileID: 1867775548}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1867775551 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2582847168046797639, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+  m_PrefabInstance: {fileID: 1867775548}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1867775552 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4009003053914376114, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+  m_PrefabInstance: {fileID: 1867775548}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1867775553 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5808988218709023271, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+  m_PrefabInstance: {fileID: 1867775548}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1913077754
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5084,6 +5222,7 @@ Transform:
   m_Children:
   - {fileID: 701753560}
   - {fileID: 857000258}
+  - {fileID: 1499920328}
   - {fileID: 1988104578}
   - {fileID: 642651751663150377}
   - {fileID: 1382939779}

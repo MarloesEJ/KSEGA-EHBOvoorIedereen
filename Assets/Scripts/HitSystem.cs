@@ -1,6 +1,9 @@
-using UnityEngine;
-using TMPro;
+using System;
 using System.Collections;
+using System.Linq;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class HitSystem : MonoBehaviour
 {
@@ -34,11 +37,12 @@ public class HitSystem : MonoBehaviour
     public int pointsWrongHit = 20;     // - bij miss
     public int pointsTooSlow = 10;      // - bij te traag
 
-    [Header("Result UI")]
-    public GameObject resultsPanel;     // panel met trofeeën + score
-    public TMP_Text scoreText;          // "Score: 240"
-    public GameObject[] trophyIcons;    // 3 trofee GameObjects in volgorde 1..3
-    public float resultDelay = 1f;      // 1 sec wachten na "Goed gedaan!"
+    [Header("Finish")]
+    [SerializeField] public GameObject resultPanel;
+    [SerializeField] public Image[] stars; // 3 sterren
+    [SerializeField] public Sprite inactiveStar; // grijze ster
+    [SerializeField] public Sprite activeStar;   // gele ster
+    [SerializeField] public TextMeshProUGUI scoreText;
 
     [Header("Result Animation")]
     public float scoreCountDuration = 1.2f; // hoe lang 0 -> eindscore telt
@@ -57,14 +61,12 @@ public class HitSystem : MonoBehaviour
     {
         score = startScore;
         UpdateText();
-        UpdateScoreUI();
-        UpdateTrophies();
 
         if (feedbackText != null)
             feedbackText.gameObject.SetActive(false);
 
-        if (resultsPanel != null)
-            resultsPanel.SetActive(false);
+        if (resultPanel != null)
+            resultPanel.SetActive(false);
     }
 
     void Update()
@@ -102,8 +104,6 @@ public class HitSystem : MonoBehaviour
         slowTimer = 0f;
 
         score = startScore;
-        UpdateScoreUI();
-        UpdateTrophies();
 
         active = true;
         ignoreInputs = 1;
@@ -120,16 +120,8 @@ public class HitSystem : MonoBehaviour
         if (feedbackText != null)
             feedbackText.gameObject.SetActive(false);
 
-        if (resultsPanel != null)
-            resultsPanel.SetActive(false);
-
-        // optioneel: tijdens reset ook trofeeën meteen uit als resultpanel aan/uit issues geeft
-        if (trophyIcons != null)
-        {
-            for (int i = 0; i < trophyIcons.Length; i++)
-                if (trophyIcons[i] != null)
-                    trophyIcons[i].SetActive(false);
-        }
+        if (resultPanel != null)
+            resultPanel.SetActive(false);
 
         UpdateText();
     }
@@ -170,8 +162,8 @@ public class HitSystem : MonoBehaviour
         active = false;
 
         // Meisje blij
-        if (girlRenderer != null && happySprite != null)
-            girlRenderer.sprite = happySprite;
+        if (girlRenderer != null)
+            girlRenderer.sprite = null;
 
         // "Goed gedaan!" tonen
         if (hitText != null)
@@ -186,91 +178,29 @@ public class HitSystem : MonoBehaviour
 
         // Speech bubble tonen + tekst
         if (speechBubbleObject != null)
-            speechBubbleObject.SetActive(true);
-
-        if (speechBubbleText != null)
-            speechBubbleText.text = "\"Dank je! Ik kan weer ademen\"";
+            speechBubbleObject.SetActive(false);
 
         // feedback weg
         if (feedbackText != null)
             feedbackText.gameObject.SetActive(false);
 
-        // na 1 sec result panel tonen + score animatie
-        StartCoroutine(ShowResultsAfterDelay());
-    }
+        int activeStars = (int)Math.Round(score / 100.0);
 
-    IEnumerator ShowResultsAfterDelay()
-    {
-        yield return new WaitForSeconds(resultDelay);
-
-        if (resultsPanel != null)
-            resultsPanel.SetActive(true);
-
-        // Start animatie van score + trofeeën één voor één
-        yield return StartCoroutine(AnimateResults());
-    }
-
-    IEnumerator AnimateResults()
-    {
-        int target = score;
-        int current = 0;
-
-        // trofeeën eerst uit
-        if (trophyIcons != null)
+        for (int i = 0; i < stars.Count(); i++)
         {
-            for (int i = 0; i < trophyIcons.Length; i++)
-                if (trophyIcons[i] != null)
-                    trophyIcons[i].SetActive(false);
+            stars[i].sprite = (i < activeStars) ? activeStar : inactiveStar;
         }
 
-        // score start op 0
-        if (scoreText != null)
-            scoreText.text = "Score: 0";
+        // Stop game
+        GameManager.Instance?.SetState(GameState.Win);
 
-        float duration = Mathf.Max(0.1f, scoreCountDuration);
-        float t = 0f;
+        GameManager.Instance?.AddScore(score);
 
-        while (t < duration)
-        {
-            t += Time.deltaTime;
-            float p = Mathf.Clamp01(t / duration);
+        // Score tonen
+        scoreText.text = $"Punten: {GameManager.Instance?.Score}";
 
-            int newScore = Mathf.RoundToInt(Mathf.Lerp(0, target, p));
-
-            if (newScore != current)
-            {
-                current = newScore;
-
-                if (scoreText != null)
-                    scoreText.text = "Score: " + current;
-
-                // trofeeën één voor één bij thresholds
-                if (trophyIcons != null)
-                {
-                    if (current >= 100 && trophyIcons.Length > 0 && trophyIcons[0] != null)
-                        trophyIcons[0].SetActive(true);
-
-                    if (current >= 200 && trophyIcons.Length > 1 && trophyIcons[1] != null)
-                        trophyIcons[1].SetActive(true);
-
-                    if (current >= 300 && trophyIcons.Length > 2 && trophyIcons[2] != null)
-                        trophyIcons[2].SetActive(true);
-                }
-            }
-
-            yield return null;
-        }
-
-        // final clamp (exact eindscore)
-        if (scoreText != null)
-            scoreText.text = "Score: " + target;
-
-        if (trophyIcons != null)
-        {
-            if (target >= 100 && trophyIcons.Length > 0 && trophyIcons[0] != null) trophyIcons[0].SetActive(true);
-            if (target >= 200 && trophyIcons.Length > 1 && trophyIcons[1] != null) trophyIcons[1].SetActive(true);
-            if (target >= 300 && trophyIcons.Length > 2 && trophyIcons[2] != null) trophyIcons[2].SetActive(true);
-        }
+        // UI aanpassen
+        resultPanel.SetActive(true);
     }
 
     bool IsInsidePerfectZone()
@@ -316,46 +246,11 @@ public class HitSystem : MonoBehaviour
     {
         score += amount;
         if (score > maxScore) score = maxScore;
-
-        UpdateScoreUI();
-        UpdateTrophies();
     }
 
     void LosePoints(int amount)
     {
         score -= amount;
         if (score < 0) score = 0;
-
-        UpdateScoreUI();
-        UpdateTrophies();
-    }
-
-    void UpdateScoreUI()
-    {
-        // Tijdens het spelen mag score live updaten (als je dat wil)
-        // Op results scherm wordt dit overschreven door AnimateResults()
-        if (scoreText != null && (resultsPanel == null || !resultsPanel.activeSelf))
-            scoreText.text = "Score: " + score;
-    }
-
-    void UpdateTrophies()
-    {
-        // Tijdens het spelen: optioneel.
-        // Als je pas trofeeën wil tonen op het eind, kan je deze functie leeg laten.
-        if (trophyIcons == null || trophyIcons.Length == 0) return;
-
-        int trophies = 0;
-        if (score >= 100) trophies = 1;
-        if (score >= 200) trophies = 2;
-        if (score >= 300) trophies = 3;
-
-        // Alleen updaten als resultsPanel NIET actief is (anders doet AnimateResults het)
-        if (resultsPanel != null && resultsPanel.activeSelf) return;
-
-        for (int i = 0; i < trophyIcons.Length; i++)
-        {
-            if (trophyIcons[i] != null)
-                trophyIcons[i].SetActive(i < trophies);
-        }
     }
 }

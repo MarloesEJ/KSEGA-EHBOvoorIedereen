@@ -1,6 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System;
+using System.Linq;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class DoneButton : MonoBehaviour
 {
@@ -29,24 +31,24 @@ public class DoneButton : MonoBehaviour
         // 👉 Score NU pas toevoegen aan GameManager
         GameManager.Instance.AddScore(result.points);
 
-        // Sterren resetten
-        for (int i = 0; i < stars.Length; i++)
-        {
-            stars[i].sprite = inactiveStar;
-        }
+        int activeStars = (int)Math.Round(result.points / 100.0);
 
-        // Actieve sterren instellen
-        for (int i = 0; i < result.stars && i < stars.Length; i++)
+        for (int i = 0; i < stars.Count(); i++)
         {
-            stars[i].sprite = activeStar;
+            stars[i].sprite = (i < activeStars) ? activeStar : inactiveStar;
         }
 
         // Score tonen
-        scoreText.text = $"Punten: {result.points}";
+        scoreText.text = $"Punten: {GameManager.Instance.Score}";
 
         // UI aanpassen
         resultPanel.SetActive(true);
-        ehboDoos.SetActive(false);
-        gameObject.SetActive(false); // Done knop zelf weg
+        //ehboDoos.SetActive(false);
+        //gameObject.SetActive(false); // Done knop zelf weg
+    }
+
+    public void NextLevel()
+    {
+        GameManager.Instance?.LoadLevelByIndex(2);
     }
 }

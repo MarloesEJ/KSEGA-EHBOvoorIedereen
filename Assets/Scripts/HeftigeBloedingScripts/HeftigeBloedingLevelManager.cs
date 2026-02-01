@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +28,13 @@ public class HeftigeBloedingLevelManager : MonoBehaviour
     [Header("Man states")]
     public GameObject manWithWound;
     public GameObject manWithBandage;
+
+    [Header("Finish")]
+    [SerializeField] public GameObject resultPanel;
+    [SerializeField] public Image[] stars; // 3 sterren
+    [SerializeField] public Sprite inactiveStar; // grijze ster
+    [SerializeField] public Sprite activeStar;   // gele ster
+    [SerializeField] public TextMeshProUGUI scoreText;
 
     public int points = 0;
 
@@ -94,8 +104,26 @@ public class HeftigeBloedingLevelManager : MonoBehaviour
 
         manWithWound.SetActive(false);
         manWithBandage.SetActive(true);
-        IntroScene.SetActive(true);
-        GameScene.SetActive(false);
+
+        resultPanel.SetActive(true);
+
+        int activeStars = (int)Math.Round(points / 100.0);
+
+        for (int i = 0; i < stars.Count(); i++)
+        {
+            stars[i].sprite = (i < activeStars) ? activeStar : inactiveStar;
+        }
+
+        // Stop game
+        GameManager.Instance?.SetState(GameState.Win);
+
+        GameManager.Instance?.AddScore(points);
+
+        // Score tonen
+        scoreText.text = $"Punten: {GameManager.Instance?.Score}";
+
+        // UI aanpassen
+        resultPanel.SetActive(true);
     }
 
     public void GlovesOnHands(){
@@ -133,6 +161,11 @@ public class HeftigeBloedingLevelManager : MonoBehaviour
             currentStep = GameStep.GetBandage;
             NextStep();
         }
+    }
+
+    public void Nextlevel()
+    {
+        GameManager.Instance?.LoadLevelByIndex(3);
     }
 
 }
