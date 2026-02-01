@@ -533,6 +533,7 @@ MonoBehaviour:
   pressureGameParent: {fileID: 701753559}
   manWithWound: {fileID: 1078195509}
   manWithBandage: {fileID: 854033451}
+  points: 0
 --- !u!4 &294078978
 Transform:
   m_ObjectHideFlags: 0
@@ -1743,7 +1744,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 294078977}
         m_TargetAssemblyTypeName: HeftigeBloedingLevelManager, Assembly-CSharp
-        m_MethodName: NextStep
+        m_MethodName: GlovesOnHands
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4009,7 +4010,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 294078977}
         m_TargetAssemblyTypeName: HeftigeBloedingLevelManager, Assembly-CSharp
-        m_MethodName: NextStep
+        m_MethodName: GauzeOnWound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5146,7 +5147,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 294078977}
         m_TargetAssemblyTypeName: HeftigeBloedingLevelManager, Assembly-CSharp
-        m_MethodName: NextStep
+        m_MethodName: BandageOnWound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
