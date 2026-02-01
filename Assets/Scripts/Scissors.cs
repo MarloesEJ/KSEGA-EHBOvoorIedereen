@@ -9,11 +9,14 @@ public class Scissors : MonoBehaviour
 
     public void CutOff()
     {
-        burnEvaluator.ResetActions();
+        // Alleen gaas en verband verwijderen
+        burnEvaluator.RemoveAction(EHBOAction.Gaas);
+        burnEvaluator.RemoveAction(EHBOAction.Verband);
 
+        // Knoppen weer bruikbaar maken
         gaasButton.interactable = true;
         verbandButton.interactable = true;
 
-        Debug.Log("Alles verwijderd met schaar");
+        Debug.Log("Gaas en verband verwijderd met schaar");
     }
 }
