@@ -56,4 +56,29 @@ public class DialogueUI : MonoBehaviour
 
         dialogueText.text = message;
     }
+
+    public void ShowActionText(EHBOAction action)
+    {
+        string message = "";
+
+        switch (action)
+        {
+            case EHBOAction.Koelen:
+                message = "Het is nu nat en koeler maar doet gelukkig minder pijn. ";
+                break;
+            case EHBOAction.Gaas:
+                message = "oohhh we doen gaas op mijn wond? Dat zorgt vast voor bescherming!";
+                break;
+            case EHBOAction.Verband:
+                message = "Het doet nu geen pijn meer! En kan er niet meer aan zitten. Dankjewel voor het helpen!";
+                break;
+            case EHBOAction.None:
+                message = "Je hebt het gaas en verband weg gehaald? Wat nu?";
+                break;
+
+        }
+
+        SetText(message);
+    }
+
 }

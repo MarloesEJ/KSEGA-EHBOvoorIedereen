@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class ScoreUI : MonoBehaviour
 {
+    public BurnTreatmentEvaluator evaluator;
     public TextMeshProUGUI scoreText;
 
     void Update()
     {
-        if (GameManager.Instance == null) return;
-
-        scoreText.text = "Score: " + GameManager.Instance.Score;
+        var result = evaluator.GetCurrentScore();
+        scoreText.text = $"Score: {result.points}";
     }
 }
