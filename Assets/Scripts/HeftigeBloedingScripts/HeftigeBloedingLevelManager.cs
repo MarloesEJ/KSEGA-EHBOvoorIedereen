@@ -26,6 +26,8 @@ public class HeftigeBloedingLevelManager : MonoBehaviour
     public GameObject manWithWound;
     public GameObject manWithBandage;
 
+    public int points = 0;
+
     void Start(){
         GameScene.SetActive(false);
         pressureGameParent.SetActive(false);
@@ -94,6 +96,43 @@ public class HeftigeBloedingLevelManager : MonoBehaviour
         manWithBandage.SetActive(true);
         IntroScene.SetActive(true);
         GameScene.SetActive(false);
+    }
+
+    public void GlovesOnHands(){
+
+        if(currentStep == GameStep.Gloves){
+            points += 100;
+            NextStep();
+        }
+        else if(currentStep > GameStep.Gloves){
+            points -= 50;
+        }
+    }
+
+    public void GauzeOnWound(){
+        if(currentStep == GameStep.GetGauze){
+            points += 100;
+            NextStep();
+        }
+        else if(currentStep > GameStep.GetGauze){
+            points -= 50;
+        }
+        else{
+            currentStep = GameStep.GetGauze;
+            points += 50;
+            NextStep();
+        }
+    }
+
+    public void BandageOnWound(){
+        if(currentStep == GameStep.GetBandage){
+            points += 100;
+            NextStep();
+        }
+        else if(currentStep < GameStep.GetBandage){
+            currentStep = GameStep.GetBandage;
+            NextStep();
+        }
     }
 
 }
