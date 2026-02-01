@@ -316,6 +316,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 904352205241029236, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1088871741069157349, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
       propertyPath: m_text
       value: 'Gefeliciteerd! Je hebt alle 5 levels voltooid en de EHBO-stappen goed
