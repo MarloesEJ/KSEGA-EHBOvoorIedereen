@@ -18,7 +18,7 @@ MonoBehaviour:
   m_PlatformId: 4e3c793746204150860bf175a9a41a05
   m_PlatformBuildProfile:
     rid: 6750011869307600897
-  m_OverrideGlobalSceneList: 1
+  m_OverrideGlobalSceneList: 0
   m_Scenes:
   - m_enabled: 1
     m_path: Assets/Scenes/MainMenu.unity
@@ -30,6 +30,8 @@ MonoBehaviour:
     m_path: Assets/Scenes/LevelHeftigeBloeding.unity
   - m_enabled: 1
     m_path: Assets/Scenes/LevelBrandwond.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/Finished.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings: []

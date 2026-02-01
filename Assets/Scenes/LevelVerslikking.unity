@@ -1515,6 +1515,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resultaten
       objectReference: {fileID: 0}
+    - target: {fileID: 8840944197713552642, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 680233625}
+    - target: {fileID: 8840944197713552642, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NextLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840944197713552642, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HitSystem, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

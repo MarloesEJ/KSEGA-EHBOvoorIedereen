@@ -49,6 +49,6 @@ public class DoneButton : MonoBehaviour
 
     public void NextLevel()
     {
-        GameManager.Instance?.LoadLevelByIndex(2);
+        GameManager.Instance?.LoadNextLevel();
     }
 }

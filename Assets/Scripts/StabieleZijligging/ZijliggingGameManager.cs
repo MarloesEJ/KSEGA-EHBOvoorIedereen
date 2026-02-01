@@ -292,6 +292,6 @@ public class ZijliggingGameManager : MonoBehaviour
 
     public void Nextlevel()
     {
-        GameManager.Instance?.LoadLevelByIndex(1);
+        GameManager.Instance?.LoadNextLevel();
     }
 }

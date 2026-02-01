@@ -253,4 +253,9 @@ public class HitSystem : MonoBehaviour
         score -= amount;
         if (score < 0) score = 0;
     }
+
+    public void NextLevel()
+    {
+        GameManager.Instance?.LoadNextLevel();
+    }
 }

@@ -165,7 +165,7 @@ public class HeftigeBloedingLevelManager : MonoBehaviour
 
     public void Nextlevel()
     {
-        GameManager.Instance?.LoadLevelByIndex(3);
+        GameManager.Instance?.LoadNextLevel();
     }
 
 }

@@ -11,27 +11,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 231593906229a614faeaab32df75c42b
-  - enabled: 0
-    path: Assets/Scenes/Scenario_Keukenhulp.unity
-    guid: 71cdba15600a74243a8090c85920fcc9
-  - enabled: 0
-    path: Assets/Scenes/Scenario_Klusser.unity
-    guid: 4b373cdc85472d649b1f1ab419c156a1
-  - enabled: 0
-    path: Assets/Scenes/Scenario_Sportieveling.unity
-    guid: d3e6452a164ef4c4a8df52b9c09a89ef
-  - enabled: 0
-    path: Assets/Scenes/Scenario_Verslikking.unity
-    guid: 80c43b8524cb41a4fbacf7bd4b6320f6
-  - enabled: 0
-    path: Assets/Scenes/Scenario_WarmeKoffie.unity
-    guid: c6b7d17b00f6a524498f0c6b9512cc1f
-  - enabled: 0
-    path: Assets/Scenes/ScenarioSelect.unity
-    guid: 69f98d5996d1b5b4ea1e826e46165a48
   - enabled: 1
     path: Assets/Scenes/LevelStabieleZijligging.unity
     guid: b29b14d49789b85449dc074dcd514028
+  - enabled: 1
+    path: Assets/Scenes/Finished.unity
+    guid: 32437d10109366b48a849899d1ef6d92
+  - enabled: 1
+    path: Assets/Scenes/LevelBrandwond.unity
+    guid: 8fd75706505619d4c8d814e2f18fa84b
+  - enabled: 1
+    path: Assets/Scenes/LevelHeftigeBloeding.unity
+    guid: a3692a6f8b2e0eb418997c5a8ae963de
+  - enabled: 1
+    path: Assets/Scenes/LevelVerslikking.unity
+    guid: 939319a223064814695deec95412321d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
