@@ -6,6 +6,19 @@ public class ZijliggingStepButton : MonoBehaviour
     [Min(1)]
     [SerializeField] private int stepNumber = 1;
     [SerializeField] private ZijliggingGameManager manager;
+    [SerializeField] private ZijliggingSelectionVisuals selectionVisuals;
+
+    private int selectionOrder;
+
+    public int StepNumber => stepNumber;
+
+    private void Awake()
+    {
+        if (selectionVisuals == null)
+        {
+            selectionVisuals = GetComponent<ZijliggingSelectionVisuals>();
+        }
+    }
 
     private void OnMouseDown()
     {
@@ -14,15 +27,20 @@ public class ZijliggingStepButton : MonoBehaviour
 
     public void Press()
     {
-        if (GameManager.Instance != null)
+        var activeManager = manager;
+
+        if (activeManager != null)
         {
-            GameManager.Instance.ApplyZijliggingStep(stepNumber);
-            return;
+            var selection = activeManager.RegisterSelection(this);
+            if (selection != ZijliggingGameManager.SelectionChange.Selected)
+            {
+                return;
+            }
         }
 
-        if (manager != null)
+        if (activeManager != null)
         {
-            manager.TryApplyStep(stepNumber);
+            activeManager.TryApplyStep(stepNumber);
         }
     }
 
@@ -34,5 +52,32 @@ public class ZijliggingStepButton : MonoBehaviour
     public void SetManager(ZijliggingGameManager stepManager)
     {
         manager = stepManager;
+    }
+
+    public void SetSelectionVisuals(ZijliggingSelectionVisuals visuals)
+    {
+        selectionVisuals = visuals;
+        if (selectionVisuals != null)
+        {
+            selectionVisuals.SetSelected(selectionOrder > 0, selectionOrder);
+        }
+    }
+
+    public void SetSelectionOrder(int order)
+    {
+        selectionOrder = Mathf.Max(0, order);
+        if (selectionVisuals != null)
+        {
+            selectionVisuals.SetSelected(selectionOrder > 0, selectionOrder);
+        }
+    }
+
+    public void ClearSelection()
+    {
+        selectionOrder = 0;
+        if (selectionVisuals != null)
+        {
+            selectionVisuals.SetSelected(false, 0);
+        }
     }
 }

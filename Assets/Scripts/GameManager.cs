@@ -31,8 +31,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int score;
     [SerializeField] private int lives = 3;
 
-    public ZijliggingGameManager ZijliggingGameManager { get; private set; }
-
     public GameState State { get; private set; } = GameState.Boot;
     public int Score => score;
     public int Lives => lives;
@@ -73,34 +71,6 @@ public class GameManager : MonoBehaviour
     public void AddScore(int amount)
     {
         score += amount;
-    }
-
-    public void RegisterZijliggingGameManager(ZijliggingGameManager manager)
-    {
-        if (manager == null)
-        {
-            return;
-        }
-
-        ZijliggingGameManager = manager;
-    }
-
-    public void UnregisterZijliggingGameManager(ZijliggingGameManager manager)
-    {
-        if (ZijliggingGameManager == manager)
-        {
-            ZijliggingGameManager = null;
-        }
-    }
-
-    public void ApplyZijliggingStep(int stepNumber)
-    {
-        if (ZijliggingGameManager == null)
-        {
-            return;
-        }
-
-        ZijliggingGameManager.TryApplyStep(stepNumber);
     }
 
     public void LoseLife(int amount = 1)

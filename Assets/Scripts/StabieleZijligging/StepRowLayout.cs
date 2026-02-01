@@ -6,7 +6,7 @@ public class StepRowLayout : MonoBehaviour
     [SerializeField] private StepPlaceholder[] items;
     [SerializeField] private Camera targetCamera;
     [SerializeField] private float horizontalPadding = 0.6f;
-    [SerializeField] private bool shuffleOnStart = false;
+    [SerializeField] private bool shuffleOnStart = true;
     [SerializeField] private bool useFixedXBounds = true;
     [SerializeField] private float minX = -6f;
     [SerializeField] private float maxX = 6f;
@@ -59,12 +59,6 @@ public class StepRowLayout : MonoBehaviour
             var target = ordered[i].transform;
             var position = positions[i];
             target.position = new Vector3(position.x, position.y, target.position.z);
-
-            var draggable = target.GetComponent<DraggablePlaceholder>();
-            if (draggable != null)
-            {
-                draggable.SetHomePosition(target.position);
-            }
         }
     }
 
