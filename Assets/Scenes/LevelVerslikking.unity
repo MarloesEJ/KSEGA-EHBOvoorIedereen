@@ -1527,6 +1527,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: HitSystem, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 9057446775472281601, guid: 7251d2893c7854043857ae0591bb03e2, type: 3}
+      propertyPath: m_text
+      value: Afronden
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

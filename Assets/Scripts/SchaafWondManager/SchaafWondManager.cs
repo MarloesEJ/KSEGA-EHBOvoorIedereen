@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +34,13 @@ public class SchaafWondManager : MonoBehaviour
     public GameObject Kind;
     public GameObject childWithWound;
     public GameObject childWithBandage;
+
+    [Header("Result UI")]
+    public GameObject resultPanel;
+    public Image[] stars;             // 3 sterren (Image)
+    public Sprite inactiveStar;       // grijze ster
+    public Sprite activeStar;         // gele ster
+    public TextMeshProUGUI scoreText;
 
     public int points = 0;
 
@@ -160,6 +170,24 @@ public class SchaafWondManager : MonoBehaviour
         GameGame.SetActive(false);
         currentStep = GameStepp.CleanWound;
         NextStep();
+
+        // Game stoppen
+        GameManager.Instance.SetState(GameState.Win);
+
+        GameManager.Instance.AddScore(points);
+
+        int activeStars = (int)Math.Round(points / 100.0);
+
+        for (int i = 0; i < stars.Count(); i++)
+        {
+            stars[i].sprite = (i < activeStars) ? activeStar : inactiveStar;
+        }
+
+        // Score tonen
+        scoreText.text = $"Punten: {GameManager.Instance.Score}";
+
+        // UI aanpassen
+        resultPanel.SetActive(true);
     }
 
     public void NextStep(){
@@ -229,5 +257,9 @@ public class SchaafWondManager : MonoBehaviour
                 break;
         }
         dialogueScript.SetText(dialogueScript.startingText);
+    }
+    public void NextLevel()
+    {
+        GameManager.Instance?.LoadNextLevel();
     }
 }

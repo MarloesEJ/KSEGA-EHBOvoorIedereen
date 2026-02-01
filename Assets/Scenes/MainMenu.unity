@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 1028738560}
+  m_Material: {fileID: 1075880158}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -899,7 +899,7 @@ MonoBehaviour:
   - LevelStabieleZijligging
   - LevelBrandwond
   - LevelHeftigeBloeding
-  - LevelVerslikking
+  - LevelSchaafwond
   - LevelVerslikking
   - Finished
   currentLevelIndex: 0
@@ -920,7 +920,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &932169265
+--- !u!21 &942087970
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -1096,7 +1096,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 955115947}
   m_CullTransparentMesh: 1
---- !u!21 &1028738560
+--- !u!21 &1075880158
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -1613,7 +1613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 932169265}
+  m_Material: {fileID: 942087970}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
