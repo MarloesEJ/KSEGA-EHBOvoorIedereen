@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 7d107d9430abb724fb7f024ecc721052
+guid: 27bc191b1d4944a40a3fd301a0dbd446
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2297870355271098573
-    second: Gemini_Generated_Image_do9a5ddo9a5ddo9a_0
-  - first:
-      213: 7924826752342948472
-    second: Gemini_Generated_Image_do9a5ddo9a5ddo9a_1
+      213: -8521058868403349492
+    second: bloodlijn_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,7 +52,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 550, y: 266, z: 572, w: 252}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -103,45 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gemini_Generated_Image_do9a5ddo9a5ddo9a_0
+      name: bloodlijn_0
       rect:
         serializedVersion: 2
-        x: 607
-        y: 297
-        width: 165
-        height: 132
+        x: 31
+        y: 9
+        width: 26
+        height: 159
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dc0a5d9d9eca3ef10800000000000000
-      internalID: 2297870355271098573
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gemini_Generated_Image_do9a5ddo9a5ddo9a_1
-      rect:
-        serializedVersion: 2
-        x: 1327
-        y: 33
-        width: 53
-        height: 45
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 87af9e791f3aafd60800000000000000
-      internalID: 7924826752342948472
+      spriteID: c0850ae0b1e1fb980800000000000000
+      internalID: -8521058868403349492
       vertices: []
       indices: 
       edges: []
@@ -151,7 +126,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -160,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Gemini_Generated_Image_do9a5ddo9a5ddo9a_0: 2297870355271098573
-      Gemini_Generated_Image_do9a5ddo9a5ddo9a_1: 7924826752342948472
+      bloodlijn_0: -8521058868403349492
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
