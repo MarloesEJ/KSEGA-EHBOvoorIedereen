@@ -172,22 +172,7 @@ public class SchaafWondManager : MonoBehaviour
         NextStep();
 
         // Game stoppen
-        GameManager.Instance.SetState(GameState.Win);
-
-        GameManager.Instance.AddScore(points);
-
-        int activeStars = (int)Math.Round(points / 100.0);
-
-        for (int i = 0; i < stars.Count(); i++)
-        {
-            stars[i].sprite = (i < activeStars) ? activeStar : inactiveStar;
-        }
-
-        // Score tonen
-        scoreText.text = $"Punten: {GameManager.Instance.Score}";
-
-        // UI aanpassen
-        resultPanel.SetActive(true);
+        
     }
 
     public void NextStep(){
@@ -224,6 +209,7 @@ public class SchaafWondManager : MonoBehaviour
                 startGameButton.SetActive(false);
                 break;
             case GameStepp.Finished:
+                finished();
                 break;
         }
         UpdateText();
@@ -261,5 +247,24 @@ public class SchaafWondManager : MonoBehaviour
     public void NextLevel()
     {
         GameManager.Instance?.LoadNextLevel();
+    }
+
+    public void finished(){
+        GameManager.Instance.SetState(GameState.Win);
+
+        GameManager.Instance.AddScore(points);
+
+        int activeStars = (int)Math.Round(points / 100.0);
+
+        for (int i = 0; i < stars.Count(); i++)
+        {
+            stars[i].sprite = (i < activeStars) ? activeStar : inactiveStar;
+        }
+
+        // Score tonen
+        scoreText.text = $"Punten: {GameManager.Instance.Score}";
+
+        // UI aanpassen
+        resultPanel.SetActive(true);
     }
 }
