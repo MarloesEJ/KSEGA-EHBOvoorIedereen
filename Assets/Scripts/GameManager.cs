@@ -15,6 +15,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    public static void LoadNextLevelStatic()
+    {
+        if (Instance != null)
+        {
+            Instance.LoadNextLevel();
+        }
+    }
+
     [Header("Progress")]
     [SerializeField] private string[] levelSceneOrder;
 
